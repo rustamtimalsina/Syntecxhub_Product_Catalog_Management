@@ -21,8 +21,7 @@ function Login() {
     try {
       const data = await loginUser(formData);
       // Handles both { token, user } or just { token }
-      login(data.user || { email: formData.email }, data.token);
-      navigate('/');
+      login(data.user, data.token);navigate('/');
     } catch (err) {
       setError(err.response?.data?.message || 'Invalid email or password.');
     } finally {

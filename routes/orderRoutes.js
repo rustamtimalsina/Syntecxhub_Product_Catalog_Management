@@ -3,6 +3,7 @@ const Order = require('../models/orderModel');
 
 const router = express.Router();
 
+
 // POST: Create a new order
 router.post('/', async (req, res) => {
   try {
@@ -26,6 +27,15 @@ router.post('/', async (req, res) => {
     res.status(201).json({ success: true, order: newOrder });
   } catch (error) {
     res.status(500).json({ message: 'Failed to create order', error: error.message });
+  }
+});
+// GET: Fetch orders for a specific user
+router.get('/user/:userId', async (req, res) => {
+  try {
+    const orders = await Order.find({ user: req.params.userId }).sort({ createdAt: -1 });
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching user orders', error: error.message });
   }
 });
 

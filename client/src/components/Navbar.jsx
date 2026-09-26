@@ -19,11 +19,16 @@ function Navbar() {
           </Link>
 
           {/* Admin link appears here when logged in */}
-          {isAuthenticated && (
-            <Link to="/admin" className="hover:text-cyan-400 text-white/70 transition-colors">
-              Admin
-            </Link>
-          )}
+         {isAuthenticated && (
+  <>
+    <Link to="/orders" className="hover:text-cyan-400 text-white/70 transition-colors">
+      Orders
+    </Link>
+    <Link to="/admin" className="hover:text-cyan-400 text-white/70 transition-colors">
+      Admin
+    </Link>
+  </>
+)}
 
           {isAuthenticated ? (
             <div className="flex items-center gap-4">
