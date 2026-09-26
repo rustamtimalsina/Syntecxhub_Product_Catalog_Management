@@ -34,9 +34,9 @@ function ProductCard({ product }) {
             src={product.image}
             alt={product.name}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            onError={(e) => {
-              e.target.src = 'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=600&auto=format&fit=crop&q=80';
-            }}
+           onError={(e) => {
+  e.target.src = 'https://placehold.co/600x600/1e293b/ffffff?text=Product';
+}}
           />
 
           {hasDiscount && (

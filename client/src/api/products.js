@@ -1,27 +1,37 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:5051/api';
+const API_BASE = 'http://localhost:5051/api/products';
 
-const api = axios.create({
-  baseURL: API_BASE_URL,
-});
+const getAuthHeaders = () => {
+  const token = localStorage.getItem('technova_token');
+  return {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+};
 
-// Fetch products, with optional search/category/page/limit
 export const getProducts = async (params = {}) => {
-  const response = await api.get('/products', { params });
+  const response = await axios.get(API_BASE, { params });
   return response.data;
 };
 
-// client/src/api/products.js
 export const getProductById = async (id) => {
-  const response = await fetch(`http://localhost:5051/api/products/${id}`);
-  if (!response.ok) {
-    throw new Error('Failed to fetch product details');
-  }
-  return response.json();
+  const response = await axios.get(`${API_BASE}/${id}`);
+  return response.data;
 };
 
-export const getCatalogStats = async () => {
-  const response = await api.get('/products/stats/catalog');
+export const createProduct = async (productData) => {
+  const response = await axios.post(API_BASE, productData, getAuthHeaders());
+  return response.data;
+};
+
+export const updateProduct = async (id, productData) => {
+  const response = await axios.put(`${API_BASE}/${id}`, productData, getAuthHeaders());
+  return response.data;
+};
+
+export const deleteProduct = async (id) => {
+  const response = await axios.delete(`${API_BASE}/${id}`, getAuthHeaders());
   return response.data;
 };
