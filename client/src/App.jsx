@@ -8,6 +8,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 import CartDrawer from './components/CartDrawer';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
+import Checkout from './pages/Checkout';
+import OrderSuccess from './pages/OrderSuccess';
 
 function App() {
   return (
@@ -21,7 +23,8 @@ function App() {
             <Route path="/products/:id" element={<ProductDetails />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-
+<Route path="/checkout" element={<Checkout />} />
+<Route path="/order-success/:id" element={<OrderSuccess />} />
             {/* Protected Admin Routes */}
             <Route element={<ProtectedRoute />}>
               <Route path="/admin" element={<AdminDashboard />} />

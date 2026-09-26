@@ -1,8 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../context/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 function CartDrawer() {
   const { cart, isOpen, setIsOpen, updateQuantity, removeFromCart, subtotal, totalItems } = useCart();
+const navigate = useNavigate();
 
   return (
     <AnimatePresence>
@@ -117,11 +119,15 @@ function CartDrawer() {
                   </div>
                   <p className="text-xs text-white/40">Taxes and shipping calculated at checkout.</p>
                   <button
-                    type="button"
-                    className="w-full py-3.5 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black font-semibold tracking-wide transition-colors shadow-lg shadow-cyan-400/20"
-                  >
-                    Proceed to Checkout
-                  </button>
+  type="button"
+  onClick={() => {
+    setIsOpen(false);
+    navigate('/checkout');
+  }}
+  className="w-full py-3.5 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black font-semibold tracking-wide transition-colors shadow-lg shadow-cyan-400/20"
+>
+  Proceed to Checkout
+</button>
                 </div>
               )}
             </motion.div>
